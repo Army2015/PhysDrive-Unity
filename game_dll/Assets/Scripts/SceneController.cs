@@ -128,7 +128,12 @@ public class SceneController : MonoBehaviour {
 		anim.SetTrigger("GameOver");
 	}
 
-	void Update () {
+//	string physics;
+//	void Update() {
+//		string s = Marshal.PtrToStringAnsi (API_Update ());
+//	}
+
+	void FixedUpdate () {
 		string s = Marshal.PtrToStringAnsi (API_Update ());
 		var j = JSONNode.Parse(s);
 		if (j ["fail"].AsInt == 1) {
