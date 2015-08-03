@@ -133,7 +133,7 @@ public class SceneController : MonoBehaviour {
 //		string s = Marshal.PtrToStringAnsi (API_Update ());
 //	}
 
-	void FixedUpdate () {
+	void Update () {
 		string s = Marshal.PtrToStringAnsi (API_Update ());
 		var j = JSONNode.Parse(s);
 		if (j ["fail"].AsInt == 1) {
