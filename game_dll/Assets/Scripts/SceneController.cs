@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using SimpleJSON;
 using System.Collections;
 using System;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
+
 
 
 public class SceneController : MonoBehaviour {
@@ -12,17 +13,11 @@ public class SceneController : MonoBehaviour {
 	public GameObject jeep;
 	public GameObject fltire, frtire, bltire, brtire;
 	[DllImport("game_dll")]
-	static extern IntPtr API_Update_Frame ();
+	static extern IntPtr API_Update ();
 	[DllImport("game_dll")]
-	static extern void API_Init (int lev);
-	[DllImport("game_dll")]
-	static extern void API_Free_Game ();
+	static extern IntPtr API_Init (int code);
 	[DllImport("game_dll")]
 	static extern void API_Input (int code);
-	[DllImport("game_dll")]
-	static extern IntPtr API_Get_Mines ();
-	[DllImport("game_dll")]
-	static extern IntPtr API_Get_Terrain ();
 
 	private Hashtable name_obj;
 
@@ -30,20 +25,13 @@ public class SceneController : MonoBehaviour {
 	void Start () {
 		explosion = (UnityEngine.GameObject)Instantiate (explosion_prefab);
 		StopExplosion ();
-
-		API_Init (0);
 		name_obj = new Hashtable ();
 		name_obj.Add ("body", jeep);
 		name_obj.Add ("fltire", fltire);
 		name_obj.Add ("frtire", frtire);
 		name_obj.Add ("bltire", bltire);
 		name_obj.Add ("brtire", brtire);
-		//terrainData = (terrain).terrainData;
 
-<<<<<<< HEAD
-		SetMines ();
-		OutputTerrain ();
-=======
 		string s = Marshal.PtrToStringAnsi (API_Init (0));
 		var j = JSONNode.Parse(s);
 		var mines = j ["mines"];
@@ -109,15 +97,11 @@ public class SceneController : MonoBehaviour {
 		Debug.Log("a: "+a);
 		Debug.Log("b: "+b);
 
->>>>>>> b98966e55404cf4ae6fc0872958e71539f068d0a
 	}
 
 	public GameObject mine;
 	public GameObject[] rocks;
-	void SetMines(){
-		string s = Marshal.PtrToStringAnsi (API_Get_Mines ());
-		var j = JSONNode.Parse(s);
-		var mines = j ["mines"];
+	void SetMines(JSONNode mines){
 		int mine_num = 200;
 		int n = rocks.Length;
 		for (int i = 0; i < mine_num; i++) {
@@ -125,14 +109,9 @@ public class SceneController : MonoBehaviour {
 			float x = pos[0].AsFloat, y = pos[1].AsFloat, z = pos[2].AsFloat;
 			/*if (x*x + z*z > 50 * 50) y -= 1;
 			if (x*x + z*z > 100 * 100) y -= 2;*/
-<<<<<<< HEAD
-			Quaternion q = Quaternion.Euler(UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360));
-			GameObject temp = (UnityEngine.GameObject)Instantiate(rocks[i%n], new Vector3(x,y,z), q);
-=======
 			Quaternion q = Quaternion.Euler(0,0,0);
 			//Quaternion q = Quaternion.Euler(UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360));
 			GameObject temp = (UnityEngine.GameObject)Instantiate(mine, new Vector3(x,y,z), q);
->>>>>>> b98966e55404cf4ae6fc0872958e71539f068d0a
 
 		}
 	}
@@ -155,80 +134,20 @@ public class SceneController : MonoBehaviour {
 			}
 		}
 	}
-
-	/*void setPos(GameObject obj, var jv)
-	{
-		float x = jv ["pos"] [0].AsFloat, y = jv ["pos"] [1].AsFloat, z = jv ["pos"] [2].AsFloat;
-		jeep.transform.position = new Vector3 (x, y, z);
-		float rx = jv ["ori"] [0].AsFloat, ry = jv ["ori"] [1].AsFloat, rz = jv ["ori"] [2].AsFloat;
-		jeep.transform.rotation = Quaternion.Euler (rx * 180 / 3.14F, ry * 180 / 3.14F , rz * 180 / 3.14F);
-	}*/
-	// Update is called once per frame
-
-	void OutputTerrain(){
-		terrain_data = terrain.terrainData;
-
-		string s = Marshal.PtrToStringAnsi (API_Get_Terrain ());
-		var j = (JSONNode.Parse(s));
-
-		var pos = j["origin"];
-		float x = pos[0].AsFloat, y = pos[1].AsFloat, z = pos[2].AsFloat;
-		UnityEngine.Debug.Log ("cpp origin:"+x+", "+y+", "+z);
-		y = terrain_data.GetInterpolatedHeight (x, z);
-		UnityEngine.Debug.Log ("unity origin:"+x+", "+y+", "+z);
-
-		pos = j ["correction"];
-		x = pos [0].AsFloat; y = pos [1].AsFloat; z = pos[2].AsFloat;
-		UnityEngine.Debug.Log ("cpp correction:"+x+", "+y+", "+z);
-		y = terrain_data.GetInterpolatedHeight (x, z);
-		UnityEngine.Debug.Log ("unity correction:"+x+", "+y+", "+z);
-	}
-
+	
+	public GameObject game_canvas;
+	public Animator anim;
+	public Terrain terrain;
 	TerrainData terrain_data;
 	public GameObject explosion_prefab;
 	GameObject explosion;
 	int counter = 0;
+
+	void GameOver() {
+		anim.SetTrigger("GameOver");
+	}
+	
 	void Update () {
-<<<<<<< HEAD
-		try{
-			/*if (counter <= 10) 
-			{
-				if (counter == 10)
-				{OutputTerrain();}
-				counter ++;
-			}*/
-				
-			string s = Marshal.PtrToStringAnsi (API_Update_Frame ());
-			var j = JSONNode.Parse(s);
-			foreach (string name in obj_list) {
-				// setPos(name_obj[name], j[name]);
-				GameObject obj = (GameObject) name_obj[name];
-				var jv = j[name];
-				float x = jv ["pos"] [0].AsFloat, y = jv ["pos"] [1].AsFloat, z = jv ["pos"] [2].AsFloat;
-				obj.transform.position = new Vector3 (x, y, z);
-				float rw = jv ["ori"] [0].AsFloat, rx = jv ["ori"] [1].AsFloat, ry = jv ["ori"] [2].AsFloat, rz = jv ["ori"] [3].AsFloat;
-				obj.transform.rotation = new Quaternion(rx, ry, rz, rw);
-				
-			}		
-			//		jeep.transform.Translate (new Vector3 (0, -2.5f, 0));
-			fltire.transform.Rotate (new Vector3 (0, 90, 0));
-			frtire.transform.Rotate (new Vector3 (0, 90, 0));
-			bltire.transform.Rotate (new Vector3 (0, 90, 0));
-			brtire.transform.Rotate (new Vector3 (0, 90, 0));
-			
-			checkUserInput ();
-			//Instantiate(explosion, jeep.transform.position, Quaternion.identity);
-			if (j ["explosion"].AsInt == 1) {
-				// Instantiate(explosion, jeep.transform.position, Quaternion.identity);
-				PlayExplosion(jeep.transform.position);
-				UnityEngine.Debug.Log("explosion");
-			}
-			//updateMesh (j ["terrain"]);
-		}
-		catch{
-		}
-		finally{
-=======
 		string s = Marshal.PtrToStringAnsi (API_Update ());
 		JSONNode j = JSONNode.Parse(s);
 		if (j ["fail"].AsInt == 1) {
@@ -262,32 +181,10 @@ public class SceneController : MonoBehaviour {
 			var jv = j["explosion_pos"];
 			float x = jv[0].AsFloat, y = jv[1].AsFloat, z = jv [2].AsFloat;
 			Instantiate(explosion, new Vector3(x, y, z), Quaternion.identity);
->>>>>>> b98966e55404cf4ae6fc0872958e71539f068d0a
 		}
 
 	}
 
-	public Terrain terrain;
-	TerrainData terrainData;
-	void updateMesh(JSONNode jv)
-	{
-		int width = jv["width"].AsInt, height = jv["height"].AsInt;
-		int pointer = jv ["pointer"].AsInt; int length = width * height;
-		float[] data = new float[length];
-		Marshal.Copy((IntPtr)pointer, data, 0, length);
-		float[,] heights = new float[height, width];
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++){
-				heights[i,j] = data[i*width+j];
-			}
-		}
-		terrainData.SetHeights (0, 0, heights);
-	}
-
-	void OnDestroy(){
-		API_Free_Game ();
-		// UnloadImportedDll ("game_dll");
-	}
 	const int up = 1;
 	const int down = 2;
 	const int left = 3;
@@ -303,9 +200,24 @@ public class SceneController : MonoBehaviour {
 		temp = Input.GetAxis ("Vertical");
 		if (temp > 0.1)
 			API_Input (up);
-		if (temp < 0.1)
+		if (temp < -0.1)
 			API_Input (down);
 		if (Input.GetKeyDown ("n"))
 			API_Input (nitro);
+	}
+
+	public Slider left_right;
+	public Slider up_down;
+	void checkUserInputGUI(){
+		float temp = left_right.value;
+		if (temp > 0.3)
+			API_Input (right);
+		if (temp < -0.3)
+			API_Input (left);
+		temp = up_down.value;
+		if (temp > 0.3)
+			API_Input (up);
+		if (temp < -0.3)
+			API_Input (down);
 	}
 }

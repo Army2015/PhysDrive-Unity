@@ -3,7 +3,7 @@ using SimpleJSON;
 using System.Collections;
 using System;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
+using UnityEngine.UI;
 
 
 public class SceneController2 : MonoBehaviour {
@@ -13,15 +13,11 @@ public class SceneController2 : MonoBehaviour {
 	public GameObject fltire, frtire, bltire, brtire;
 	public GameObject ball, button;
 	[DllImport("game_dll")]
-	static extern IntPtr API_Update_Frame ();
+	static extern IntPtr API_Update ();
 	[DllImport("game_dll")]
 	static extern void API_Init (int lev);
 	[DllImport("game_dll")]
-	static extern void API_Free_Game ();
-	[DllImport("game_dll")]
 	static extern void API_Input (int code);
-	[DllImport("game_dll")]
-	static extern IntPtr API_Get_Mines ();
 
 	private Hashtable name_obj;
 	string[] obj_list = {"body", "fltire", "frtire", "bltire", "brtire", "ball", "button"};
@@ -35,13 +31,11 @@ public class SceneController2 : MonoBehaviour {
 		name_obj.Add ("brtire", brtire);
 		name_obj.Add ("ball", ball);
 		name_obj.Add ("button", button);
-		//terrainData = (terrain).terrainData;
-		//SetMines ();
 	}
 	
 	void Update () {
 		try{
-			string s = Marshal.PtrToStringAnsi (API_Update_Frame ());
+			string s = Marshal.PtrToStringAnsi (API_Update ());
 			var j = JSONNode.Parse(s);
 			foreach (string name in obj_list) {
 				// setPos(name_obj[name], j[name]);
@@ -58,18 +52,12 @@ public class SceneController2 : MonoBehaviour {
 			frtire.transform.Rotate (new Vector3 (0, 90, 0));
 			bltire.transform.Rotate (new Vector3 (0, 90, 0));
 			brtire.transform.Rotate (new Vector3 (0, 90, 0));
-<<<<<<< HEAD
-			button.transform.Rotate (new Vector3 (0, 90, 0));
-			
-			checkUserInput ();
-=======
 			button.transform.Rotate (new Vector3 (90, 0, 0));
 
 			API_Input (up);
 			//checkUserInput ();
 			//checkUserInputGUI();
 
->>>>>>> b98966e55404cf4ae6fc0872958e71539f068d0a
 		}
 		catch{
 		}
@@ -104,5 +92,21 @@ public class SceneController2 : MonoBehaviour {
 			API_Input (nitro);
 		if (Input.GetKeyDown ("b"))
 			API_Input (stop);
+	}
+
+	public Slider left_right;
+	public Slider up_down;
+	void checkUserInputGUI(){
+		float temp = left_right.value;
+		if (temp > 0.3)
+			API_Input (right);
+		if (temp < -0.3)
+			API_Input (left);
+
+		temp = up_down.value;
+		if (temp > 0.1)
+			API_Input (up);
+		if (temp < -0.3)
+			API_Input (down);
 	}
 }
