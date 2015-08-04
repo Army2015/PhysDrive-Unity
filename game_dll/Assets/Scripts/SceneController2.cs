@@ -58,9 +58,18 @@ public class SceneController2 : MonoBehaviour {
 			frtire.transform.Rotate (new Vector3 (0, 90, 0));
 			bltire.transform.Rotate (new Vector3 (0, 90, 0));
 			brtire.transform.Rotate (new Vector3 (0, 90, 0));
+<<<<<<< HEAD
 			button.transform.Rotate (new Vector3 (0, 90, 0));
 			
 			checkUserInput ();
+=======
+			button.transform.Rotate (new Vector3 (90, 0, 0));
+
+			API_Input (up);
+			//checkUserInput ();
+			//checkUserInputGUI();
+
+>>>>>>> b98966e55404cf4ae6fc0872958e71539f068d0a
 		}
 		catch{
 		}
