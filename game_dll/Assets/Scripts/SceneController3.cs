@@ -12,11 +12,15 @@ public class SceneController3 : MonoBehaviour {
 	public GameObject jeep;
 	public GameObject fltire, frtire, bltire, brtire;
 	[DllImport("game_dll")]
-	static extern IntPtr API_Update ();
+	static extern IntPtr API_Update_Frame ();
 	[DllImport("game_dll")]
 	static extern void API_Init (int lev);
 	[DllImport("game_dll")]
+	static extern void API_Free_Game ();
+	[DllImport("game_dll")]
 	static extern void API_Input (int code);
+	[DllImport("game_dll")]
+	static extern IntPtr API_Get_Rocks ();
 
 	private Hashtable name_obj;
 	string[] obj_list = {"body", "fltire", "frtire", "bltire", "brtire"};
@@ -58,7 +62,7 @@ public class SceneController3 : MonoBehaviour {
 	
 	void Update () {
 		try{
-			string s = Marshal.PtrToStringAnsi (API_Update ());
+			string s = Marshal.PtrToStringAnsi (API_Update_Frame ());
 			var j = JSONNode.Parse(s);
 			foreach (string name in obj_list) {
 				// setPos(name_obj[name], j[name]);
@@ -86,7 +90,11 @@ public class SceneController3 : MonoBehaviour {
 		}
 
 	}
-	
+
+	void OnDestroy(){
+		 // API_Free_Game ();
+		// UnloadImportedDll ("game_dll");
+	}
 
 	const int up = 1;
 	const int down = 2;

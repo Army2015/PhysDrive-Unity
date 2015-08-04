@@ -20,9 +20,8 @@ public class CameraFollow2 : MonoBehaviour {
 	{
 		// Create a postion the camera is aiming for based on the offset from the target.
 		offset = target.position - center;
-		offset.Normalize ();
-		Vector3 targetCamPos = target.position + 10.0f * offset;
-		targetCamPos += new Vector3 (0, 3, 0);
+		Vector3 targetCamPos = center + 1.3f * offset;
+		targetCamPos += new Vector3 (0, 10, 0);
 		transform.LookAt (target);
 		transform.Rotate (new Vector3 (-5, 0, 0));
 		
