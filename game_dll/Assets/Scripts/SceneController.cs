@@ -73,7 +73,8 @@ public class SceneController : MonoBehaviour {
 			float x = pos[0].AsFloat, y = pos[1].AsFloat, z = pos[2].AsFloat;
 			/*if (x*x + z*z > 50 * 50) y -= 1;
 			if (x*x + z*z > 100 * 100) y -= 2;*/
-			Quaternion q = Quaternion.Euler(UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360));
+			Quaternion q = Quaternion.Euler(0,0,0);
+			//Quaternion q = Quaternion.Euler(UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360));
 			GameObject temp = (UnityEngine.GameObject)Instantiate(rocks[i%n], new Vector3(x,y,z), q);
 
 		}
@@ -155,6 +156,8 @@ public class SceneController : MonoBehaviour {
 			
 		}		
 		//		jeep.transform.Translate (new Vector3 (0, -2.5f, 0));
+
+		jeep.transform.Translate (new Vector3 (0, -2.77f, 0));
 		fltire.transform.Rotate (new Vector3 (0, 90, 0));
 		frtire.transform.Rotate (new Vector3 (0, 90, 0));
 		bltire.transform.Rotate (new Vector3 (0, 90, 0));
@@ -179,9 +182,9 @@ public class SceneController : MonoBehaviour {
 	void checkUserInput(){
 		float temp = Input.GetAxis ("Horizontal");
 		if (temp > 0.1)
-			API_Input (right);
-		if (temp < -0.1)
 			API_Input (left);
+		if (temp < -0.1)
+			API_Input (right);
 		temp = Input.GetAxis ("Vertical");
 		if (temp > 0.1)
 			API_Input (up);
