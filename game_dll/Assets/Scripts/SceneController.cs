@@ -98,25 +98,7 @@ public class SceneController : MonoBehaviour {
 			}
 		}
 	}
-
-	/*void OutputTerrain(){
-		terrain_data = terrain.terrainData;
-
-		string s = Marshal.PtrToStringAnsi (API_Get_Terrain ());
-		var j = (JSONNode.Parse(s));
-
-		var pos = j["origin"];
-		float x = pos[0].AsFloat, y = pos[1].AsFloat, z = pos[2].AsFloat;
-		UnityEngine.Debug.Log ("cpp origin:"+x+", "+y+", "+z);
-		y = terrain_data.GetInterpolatedHeight (x, z);
-		UnityEngine.Debug.Log ("unity origin:"+x+", "+y+", "+z);
-
-		pos = j ["correction"];
-		x = pos [0].AsFloat; y = pos [1].AsFloat; z = pos[2].AsFloat;
-		UnityEngine.Debug.Log ("cpp correction:"+x+", "+y+", "+z);
-		y = terrain_data.GetInterpolatedHeight (x, z);
-		UnityEngine.Debug.Log ("unity correction:"+x+", "+y+", "+z);
-	}*/
+	
 	public GameObject game_canvas;
 	public Animator anim;
 	public Terrain terrain;
@@ -128,12 +110,7 @@ public class SceneController : MonoBehaviour {
 	void GameOver() {
 		anim.SetTrigger("GameOver");
 	}
-
-//	string physics;
-//	void Update() {
-//		string s = Marshal.PtrToStringAnsi (API_Update ());
-//	}
-
+	
 	void Update () {
 		string s = Marshal.PtrToStringAnsi (API_Update ());
 		var j = JSONNode.Parse(s);
