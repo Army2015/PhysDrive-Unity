@@ -31,46 +31,46 @@ public class SceneController2 : MonoBehaviour {
 		name_obj.Add ("brtire", brtire);
 		name_obj.Add ("ball", ball);
 		name_obj.Add ("button", button);
+
+
 	}
-	
+
+	private string physics_string;
+	void FixedUpdate(){
+		physics_string = Marshal.PtrToStringAnsi (API_Update ());
+		var j = JSONNode.Parse(physics_string);
+		foreach (string name in obj_list) {
+			// setPos(name_obj[name], j[name]);
+			GameObject obj = (GameObject) name_obj[name];
+			var jv = j[name];
+			float x = jv ["pos"] [0].AsFloat, y = jv ["pos"] [1].AsFloat, z = jv ["pos"] [2].AsFloat;
+			obj.transform.position = new Vector3 (x, y, z);
+			float rw = jv ["ori"] [0].AsFloat, rx = jv ["ori"] [1].AsFloat, ry = jv ["ori"] [2].AsFloat, rz = jv ["ori"] [3].AsFloat;
+			obj.transform.rotation = new Quaternion(rx, ry, rz, rw);
+
+		}
+		fltire.transform.Rotate (new Vector3 (0, 90, 0));
+		frtire.transform.Rotate (new Vector3 (0, 90, 0));
+		bltire.transform.Rotate (new Vector3 (0, 90, 0));
+		brtire.transform.Rotate (new Vector3 (0, 90, 0));
+		button.transform.Rotate (new Vector3 (90, 0, 0));
+	}
+
 	void Update () {
 		try{
-			string s = Marshal.PtrToStringAnsi (API_Update ());
-			var j = JSONNode.Parse(s);
-			foreach (string name in obj_list) {
-				// setPos(name_obj[name], j[name]);
-				GameObject obj = (GameObject) name_obj[name];
-				var jv = j[name];
-				float x = jv ["pos"] [0].AsFloat, y = jv ["pos"] [1].AsFloat, z = jv ["pos"] [2].AsFloat;
-				obj.transform.position = new Vector3 (x, y, z);
-				float rw = jv ["ori"] [0].AsFloat, rx = jv ["ori"] [1].AsFloat, ry = jv ["ori"] [2].AsFloat, rz = jv ["ori"] [3].AsFloat;
-				obj.transform.rotation = new Quaternion(rx, ry, rz, rw);
-				
-			}		
-			//		jeep.transform.Translate (new Vector3 (0, -2.5f, 0));
-			jeep.transform.Translate (new Vector3 (0, -2.77f, 0));
-			fltire.transform.Rotate (new Vector3 (0, 90, 0));
-			frtire.transform.Rotate (new Vector3 (0, 90, 0));
-			bltire.transform.Rotate (new Vector3 (0, 90, 0));
-			brtire.transform.Rotate (new Vector3 (0, 90, 0));
-			button.transform.Rotate (new Vector3 (90, 0, 0));
 
 			API_Input (up);
-			//checkUserInput ();
-			//checkUserInputGUI();
+			// checkUserInput ();
+			// checkUserInputGUI();
 
 		}
 		catch{
 		}
 		finally{
 		}
-
+		Debug.Log ("deltaTime:"+Time.deltaTime);
 	}
 
-	void OnDestroy(){
-		 // API_Free_Game ();
-		// UnloadImportedDll ("game_dll");
-	}
 	const int up = 1;
 	const int down = 2;
 	const int left = 3;
