@@ -102,11 +102,13 @@ public class SceneController : MonoBehaviour {
 	public GameObject mine;
 	public GameObject[] rocks;
 	void SetMines(JSONNode mines){
+		terrain_data = terrain.terrainData;
 		int mine_num = 200;
 		int n = rocks.Length;
 		for (int i = 0; i < mine_num; i++) {
 			var pos = mines[i];
 			float x = pos[0].AsFloat, y = pos[1].AsFloat, z = pos[2].AsFloat;
+			y = terrain_data.GetInterpolatedHeight((x+150.0f)/300.0f, (z+150.0f)/300.0f)+terrain.transform.position.y;
 			/*if (x*x + z*z > 50 * 50) y -= 1;
 			if (x*x + z*z > 100 * 100) y -= 2;*/
 			Quaternion q = Quaternion.Euler(0,0,0);

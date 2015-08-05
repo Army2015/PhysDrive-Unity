@@ -35,14 +35,13 @@ public class SceneController3 : MonoBehaviour {
 
 	public GameObject rock;
 	public GameObject[] rocks;
-	public Material[] materials;
+	public GameObject[] rocks_prefab;
 	void InitRocks(){
 		int rocks_num = 50;
 		rocks = new GameObject[rocks_num];
-		int n = materials.Length;
+		int n = rocks_prefab.Length;
 		for (int i = 0; i < rocks_num; i++) {
-			rocks[i] = (GameObject)Instantiate(rock, new Vector3(0,0,0), Quaternion.identity);
-			rocks[i].GetComponent<Renderer>().material = materials[i%n];
+			rocks[i] = (GameObject)Instantiate(rocks_prefab[i%n], new Vector3(0,0,0), Quaternion.identity);
 		}
 	}
 
@@ -50,9 +49,11 @@ public class SceneController3 : MonoBehaviour {
 		int rocks_num = 40;
 		
 		for (int i = 0; i < rocks_num; i++) {
-			var pos = j[i];
-			float x = pos[0].AsFloat, y = pos[1].AsFloat, z = pos[2].AsFloat;
-			rocks[i].transform.position = new Vector3(x, y, z);
+			var jv = j[i];
+			float x = jv ["pos"] [0].AsFloat, y = jv ["pos"] [1].AsFloat, z = jv ["pos"] [2].AsFloat;
+			rocks[i].transform.position = new Vector3 (x, y, z);
+			float rw = jv ["ori"] [0].AsFloat, rx = jv ["ori"] [1].AsFloat, ry = jv ["ori"] [2].AsFloat, rz = jv ["ori"] [3].AsFloat;
+			rocks[i].transform.rotation = new Quaternion(rx, ry, rz, rw);
 		}
 	}
 	
@@ -71,6 +72,7 @@ public class SceneController3 : MonoBehaviour {
 				
 			}		
 			//		jeep.transform.Translate (new Vector3 (0, -2.5f, 0));
+			jeep.transform.Translate (new Vector3 (0, -2.77f, 0));
 			fltire.transform.Rotate (new Vector3 (0, 90, 0));
 			frtire.transform.Rotate (new Vector3 (0, 90, 0));
 			bltire.transform.Rotate (new Vector3 (0, 90, 0));

@@ -49,7 +49,7 @@ public class SceneController4 : MonoBehaviour {
 			var jv = j[i];
 			float x = jv ["pos"] [0].AsFloat, y = jv ["pos"] [1].AsFloat, z = jv ["pos"] [2].AsFloat;
 			planks[i].transform.position = new Vector3 (x, y, z);
-			float rw = jv ["ori"] [0].AsFloat, rx = jv ["ori"] [1].AsFloat, ry = jv ["ori"] [2].AsFloat, rz = jv ["ori"] [3].AsFloat;
+			float rw = jv ["ori"] [0].AsFloat, rx = jv ["ori"] [1].AsFloat, ry = jv ["ori"] [2].AsFloat, rz = jv ["ori"] [3].AsFloat; //modified
 			planks[i].transform.rotation = new Quaternion(rx, ry, rz, rw);
 		}
 	}
