@@ -35,7 +35,7 @@ public class SceneController4 : MonoBehaviour {
 
 
 	void InitPlanks(){
-		int planks_num = 14;
+		int planks_num = 9;
 		planks = new GameObject[planks_num];
 		for (int i = 0; i < planks_num; i++) {
 			planks[i] = (GameObject)Instantiate(plank, new Vector3(0,0,0), Quaternion.identity);
@@ -43,7 +43,7 @@ public class SceneController4 : MonoBehaviour {
 	}
 
 	void GetPlanks(JSONNode j){
-		int planks_num = 14;
+		int planks_num = 9;
 		
 		for (int i = 0; i < planks_num; i++) {
 			var jv = j[i];
