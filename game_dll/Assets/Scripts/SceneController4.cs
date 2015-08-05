@@ -35,7 +35,7 @@ public class SceneController4 : MonoBehaviour {
 
 
 	void InitPlanks(){
-		int planks_num = 9;
+		int planks_num = 14;
 		planks = new GameObject[planks_num];
 		for (int i = 0; i < planks_num; i++) {
 			planks[i] = (GameObject)Instantiate(plank, new Vector3(0,0,0), Quaternion.identity);
@@ -43,13 +43,13 @@ public class SceneController4 : MonoBehaviour {
 	}
 
 	void GetPlanks(JSONNode j){
-		int planks_num = 9;
+		int planks_num = 14;
 		
 		for (int i = 0; i < planks_num; i++) {
 			var jv = j[i];
 			float x = jv ["pos"] [0].AsFloat, y = jv ["pos"] [1].AsFloat, z = jv ["pos"] [2].AsFloat;
 			planks[i].transform.position = new Vector3 (x, y, z);
-			float rw = jv ["ori"] [0].AsFloat, rx = jv ["ori"] [1].AsFloat, ry = jv ["ori"] [2].AsFloat, rz = jv ["ori"] [3].AsFloat;
+			float rw = jv ["ori"] [0].AsFloat, rx = jv ["ori"] [1].AsFloat, ry = jv ["ori"] [2].AsFloat, rz = jv ["ori"] [3].AsFloat; //modified
 			planks[i].transform.rotation = new Quaternion(rx, ry, rz, rw);
 		}
 	}
