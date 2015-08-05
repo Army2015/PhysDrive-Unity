@@ -48,6 +48,7 @@ public class SceneController2 : MonoBehaviour {
 				
 			}		
 			//		jeep.transform.Translate (new Vector3 (0, -2.5f, 0));
+			jeep.transform.Translate (new Vector3 (0, -2.77f, 0));
 			fltire.transform.Rotate (new Vector3 (0, 90, 0));
 			frtire.transform.Rotate (new Vector3 (0, 90, 0));
 			bltire.transform.Rotate (new Vector3 (0, 90, 0));
