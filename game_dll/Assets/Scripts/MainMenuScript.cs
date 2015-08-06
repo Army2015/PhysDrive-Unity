@@ -25,22 +25,19 @@ public class MainMenuScript : MonoBehaviour {
 	void Update () {
 	
 	}
-
-
+	
 	void OnGUI(){
 		//Display backgroundTexture
 		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroundTexture);
-		GUI.Box (new Rect(Screen.width /2 - 490,Screen.height/2 -275, Screen.width - 100, Screen.height -100),"Main Menu", MenuColor);
+		GUI.Box (new Rect(Screen.width / 2 - 50,70,100,100),"Main Menu", MenuColor);
 		FirstMenu ();
 	}
 
-
+	public float rightOfset = 300f;
+	public float leftOfset = -270f;
 	void FirstMenu(){
-		float rightOfset = 300f;
-		float leftOfset = -240f;		
-	
+			
 
-		
 		if(GUI.Button(BuildStringToGUI(0f,leftOfset),"Level 0",buttonColor)){	
 			source.PlayOneShot(clickSound,1f);
 			Application.LoadLevel("Scene0");
