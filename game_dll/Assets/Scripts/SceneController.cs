@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 public class SceneController : MonoBehaviour {
 	public AudioClip explosionSound;
-
+	private bool mineExploted = false;
 	private AudioSource source;
 	
 	void Awake () {
@@ -191,6 +191,7 @@ public class SceneController : MonoBehaviour {
 			float x = jv[0].AsFloat, y = jv[1].AsFloat, z = jv [2].AsFloat;
 			Instantiate(explosion, new Vector3(x, y, z), Quaternion.identity);
 			source.PlayOneShot (explosionSound, 1f);
+			mineExploted = true;
 		}
 		
 	}
@@ -209,7 +210,7 @@ public class SceneController : MonoBehaviour {
 			API_Input (right);
 		temp = Input.GetAxis ("Vertical");
 		if (temp > 0.1) {
-			print (temp);
+
 			API_Input (up);
 		}
 		if (temp < -0.1)
@@ -231,5 +232,8 @@ public class SceneController : MonoBehaviour {
 			API_Input (up);
 		if (temp < -0.3)
 			API_Input (down);
+	}
+	public bool didMineExplode(){
+		return mineExploted;
 	}
 }

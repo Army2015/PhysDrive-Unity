@@ -8,11 +8,12 @@ using System.Runtime.InteropServices;
 
 
 public class SceneController1 : MonoBehaviour {
-	public AudioClip explosionSound;
-	private AudioSource source;
+	//public AudioClip jeepSound;
+	//private AudioSource source;
+	//private bool soundNotPlaying = false;
 	
 	void Awake () {
-		source = GetComponent<AudioSource>();
+		//source = GetComponent<AudioSource>();
 	}
 	
 	// Use this for initialization
@@ -77,8 +78,10 @@ public class SceneController1 : MonoBehaviour {
 		if (temp < -0.1)
 			API_Input (right);
 		temp = Input.GetAxis ("Vertical");
-		if (temp > 0.1)
+		if (temp > 0.1) {
 			API_Input (up);
+		
+		}
 		if (temp < -0.1)
 			API_Input (down);
 		if (Input.GetKeyDown ("n"))
