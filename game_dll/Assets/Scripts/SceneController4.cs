@@ -53,11 +53,23 @@ public class SceneController4 : MonoBehaviour {
 			planks[i].transform.rotation = new Quaternion(rx, ry, rz, rw);
 		}
 	}
+
+	public Animator anim;
 	
+	void GameOver() {
+		anim.SetTrigger("GameOver");
+	}
+
 	void Update () {
 		try{
 			string s = Marshal.PtrToStringAnsi (API_Update ());
 			var j = JSONNode.Parse(s);
+			if (j ["fail"].AsInt == 1) {
+				GameOver();
+			}
+			if (j ["success"].AsInt == 1){
+				anim.SetTrigger("GameOver");
+			}
 			foreach (string name in obj_list) {
 				// setPos(name_obj[name], j[name]);
 				GameObject obj = (GameObject) name_obj[name];
@@ -68,6 +80,7 @@ public class SceneController4 : MonoBehaviour {
 				obj.transform.rotation = new Quaternion(rx, ry, rz, rw);
 				
 			}		
+			jeep.transform.Translate (new Vector3 (0, -2.77f, 0));
 			fltire.transform.Rotate (new Vector3 (0, 90, 0));
 			frtire.transform.Rotate (new Vector3 (0, 90, 0));
 			bltire.transform.Rotate (new Vector3 (0, 90, 0));
