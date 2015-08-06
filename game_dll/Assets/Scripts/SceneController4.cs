@@ -7,6 +7,13 @@ using System.Diagnostics;
 
 
 public class SceneController4 : MonoBehaviour {
+	public AudioClip accelerationSound;
+	private AudioSource source;
+	
+	void Awake () {
+		source = GetComponent<AudioSource>();
+	}
+
 
 	// Use this for initialization
 	public GameObject jeep;
@@ -112,8 +119,10 @@ public class SceneController4 : MonoBehaviour {
 		if (temp < -0.1)
 			API_Input (right);
 		temp = Input.GetAxis ("Vertical");
-		if (temp > 0.1)
+		if (temp > 0.1) {
+			source.PlayOneShot (accelerationSound, .5f);
 			API_Input (up);
+		}
 		if (temp < 0.1)
 			API_Input (down);
 		if (Input.GetKeyDown ("n"))

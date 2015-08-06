@@ -8,7 +8,13 @@ using System.Runtime.InteropServices;
 
 
 public class SceneController : MonoBehaviour {
-
+	public AudioClip explosionSound;
+	private AudioSource source;
+	
+	void Awake () {
+		source = GetComponent<AudioSource>();
+	}
+	
 	// Use this for initialization
 	public GameObject jeep;
 	public GameObject fltire, frtire, bltire, brtire;
@@ -18,9 +24,9 @@ public class SceneController : MonoBehaviour {
 	static extern IntPtr API_Init (int code);
 	[DllImport("game_dll")]
 	static extern void API_Input (int code);
-
+	
 	private Hashtable name_obj;
-
+	
 	string[] obj_list = {"body", "fltire", "frtire", "bltire", "brtire"};
 	void Start () {
 		explosion = (UnityEngine.GameObject)Instantiate (explosion_prefab);
@@ -31,37 +37,37 @@ public class SceneController : MonoBehaviour {
 		name_obj.Add ("frtire", frtire);
 		name_obj.Add ("bltire", bltire);
 		name_obj.Add ("brtire", brtire);
-
+		
 		string s = Marshal.PtrToStringAnsi (API_Init (0));
 		var j = JSONNode.Parse(s);
 		var mines = j ["mines"];
 		SetMines (mines);
-
+		
 		anim = game_canvas.GetComponent<Animator> ();
-
+		
 		// checkTerrain (mines);
-
-
+		
+		
 	}
-
+	
 	void checkTerrain(JSONNode mines){
 		terrain_data = terrain.terrainData;
-
-//		var pos = mines[0];
-//		float x = pos[0].AsFloat, y = pos[1].AsFloat, z = pos[2].AsFloat;
-//		Debug.Log ("mine0: x: " + x + ", " + "z: " + z + ", " + "y: " + y);
-//		Debug.Log ("InterpolatedHeight: " + terrain_data.GetInterpolatedHeight((x+150.0f)/300.0f, (z+150.0f)/300.0f));
-//
-//		pos = mines[1];
-//		x = pos [0].AsFloat; y = pos [1].AsFloat; z = pos[2].AsFloat;
-//		Debug.Log ("mine1: x: " + x + ", " + "z: " + z + ", " + "y: " + y);
-//		Debug.Log ("InterpolatedHeight: " + terrain_data.GetInterpolatedHeight((x+150.0f)/300.0f, (z+150.0f)/300.0f));
-//
-//		pos = mines[2];
-//		x = pos [0].AsFloat; y = pos[1].AsFloat; z = pos[2].AsFloat;
-//		Debug.Log ("mine2: x: " + x + ", " + "z: " + z + ", " + "y: " + y);
-//		Debug.Log ("InterpolatedHeight: " + terrain_data.GetInterpolatedHeight((x+150.0f)/300.0f, (z+150.0f)/300.0f));
-
+		
+		//		var pos = mines[0];
+		//		float x = pos[0].AsFloat, y = pos[1].AsFloat, z = pos[2].AsFloat;
+		//		Debug.Log ("mine0: x: " + x + ", " + "z: " + z + ", " + "y: " + y);
+		//		Debug.Log ("InterpolatedHeight: " + terrain_data.GetInterpolatedHeight((x+150.0f)/300.0f, (z+150.0f)/300.0f));
+		//
+		//		pos = mines[1];
+		//		x = pos [0].AsFloat; y = pos [1].AsFloat; z = pos[2].AsFloat;
+		//		Debug.Log ("mine1: x: " + x + ", " + "z: " + z + ", " + "y: " + y);
+		//		Debug.Log ("InterpolatedHeight: " + terrain_data.GetInterpolatedHeight((x+150.0f)/300.0f, (z+150.0f)/300.0f));
+		//
+		//		pos = mines[2];
+		//		x = pos [0].AsFloat; y = pos[1].AsFloat; z = pos[2].AsFloat;
+		//		Debug.Log ("mine2: x: " + x + ", " + "z: " + z + ", " + "y: " + y);
+		//		Debug.Log ("InterpolatedHeight: " + terrain_data.GetInterpolatedHeight((x+150.0f)/300.0f, (z+150.0f)/300.0f));
+		
 		float[] x = new float[200];
 		float[] y = new float[200];
 		int mine_num = 200;
@@ -72,7 +78,7 @@ public class SceneController : MonoBehaviour {
 			y[i] = py;
 			Debug.Log(i);
 		}
-
+		
 		float mxy = 0;
 		float mx = 0;
 		float mx2 = 0;
@@ -87,18 +93,18 @@ public class SceneController : MonoBehaviour {
 		mx2 /= mine_num;
 		my /= mine_num;
 		mxy /= mine_num;
-
+		
 		float a_up = mxy - mx * my;
 		float a_down = mx2 - mx * mx;
 		float a = a_up / a_down;
-
+		
 		float b = my - a * mx;
-
+		
 		Debug.Log("a: "+a);
 		Debug.Log("b: "+b);
-
+		
 	}
-
+	
 	public GameObject mine;
 	public GameObject[] rocks;
 	void SetMines(JSONNode mines){
@@ -108,16 +114,16 @@ public class SceneController : MonoBehaviour {
 		for (int i = 0; i < mine_num; i++) {
 			var pos = mines[i];
 			float x = pos[0].AsFloat, y = pos[1].AsFloat, z = pos[2].AsFloat;
-			y = terrain_data.GetInterpolatedHeight((x+150.0f)/300.0f, (z+150.0f)/300.0f)+terrain.transform.position.y;
+			y = terrain_data.GetInterpolatedHeight((x+150.0f)/300.0f, (z+150.0f)/300.0f)-14.11622f;
 			/*if (x*x + z*z > 50 * 50) y -= 1;
 			if (x*x + z*z > 100 * 100) y -= 2;*/
 			Quaternion q = Quaternion.Euler(0,0,0);
 			//Quaternion q = Quaternion.Euler(UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360));
 			GameObject temp = (UnityEngine.GameObject)Instantiate(mine, new Vector3(x,y,z), q);
-
+			
 		}
 	}
-
+	
 	void PlayExplosion(Vector3 pos){
 		explosion.transform.position = pos;
 		foreach (Transform child in explosion.transform) {
@@ -127,7 +133,7 @@ public class SceneController : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	void StopExplosion(){
 		foreach (Transform child in explosion.transform) {
 			if (child.transform.name != "Point light"){
@@ -144,7 +150,7 @@ public class SceneController : MonoBehaviour {
 	public GameObject explosion_prefab;
 	GameObject explosion;
 	int counter = 0;
-
+	
 	void GameOver() {
 		anim.SetTrigger("GameOver");
 	}
@@ -169,7 +175,7 @@ public class SceneController : MonoBehaviour {
 			
 		}		
 		//		jeep.transform.Translate (new Vector3 (0, -2.5f, 0));
-
+		
 		jeep.transform.Translate (new Vector3 (0, -2.77f, 0));
 		fltire.transform.Rotate (new Vector3 (0, 90, 0));
 		frtire.transform.Rotate (new Vector3 (0, 90, 0));
@@ -183,16 +189,17 @@ public class SceneController : MonoBehaviour {
 			var jv = j["explosion_pos"];
 			float x = jv[0].AsFloat, y = jv[1].AsFloat, z = jv [2].AsFloat;
 			Instantiate(explosion, new Vector3(x, y, z), Quaternion.identity);
+			source.PlayOneShot (explosionSound, 1f);
 		}
-
+		
 	}
-
+	
 	const int up = 1;
 	const int down = 2;
 	const int left = 3;
 	const int right = 4;
 	const int nitro = 5;
-
+	
 	void checkUserInput(){
 		float temp = Input.GetAxis ("Horizontal");
 		if (temp > 0.1)
@@ -207,7 +214,7 @@ public class SceneController : MonoBehaviour {
 		if (Input.GetKeyDown ("n"))
 			API_Input (nitro);
 	}
-
+	
 	public Slider left_right;
 	public Slider up_down;
 	void checkUserInputGUI(){
