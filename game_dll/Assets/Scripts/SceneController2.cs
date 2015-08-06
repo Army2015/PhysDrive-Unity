@@ -49,6 +49,7 @@ public class SceneController2 : MonoBehaviour {
 			obj.transform.rotation = new Quaternion(rx, ry, rz, rw);
 
 		}
+		jeep.transform.Translate (new Vector3 (0, -2.77f, 0));
 		fltire.transform.Rotate (new Vector3 (0, 90, 0));
 		frtire.transform.Rotate (new Vector3 (0, 90, 0));
 		bltire.transform.Rotate (new Vector3 (0, 90, 0));

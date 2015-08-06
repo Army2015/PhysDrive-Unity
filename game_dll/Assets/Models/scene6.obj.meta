@@ -1,0 +1,181 @@
+fileFormatVersion: 2
+guid: f56b3f9971c71bb4f9133bd722710ef7
+timeCreated: 1438822014
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: default_MeshPart0[-1016]
+    100002: default_MeshPart0[-1050]
+    100004: default_MeshPart0[-1082]
+    100006: default_MeshPart0[-1106]
+    100008: default_MeshPart0[-1134]
+    100010: default_MeshPart0[-1156]
+    100012: default_MeshPart0[-1184]
+    100014: default_MeshPart0[-1206]
+    100016: default_MeshPart0[-1234]
+    100018: default_MeshPart0[-962]
+    100020: default_MeshPart1[-1014]
+    100022: default_MeshPart1[-1052]
+    100024: default_MeshPart1[-1084]
+    100026: default_MeshPart1[-1108]
+    100028: default_MeshPart1[-1132]
+    100030: default_MeshPart1[-1158]
+    100032: default_MeshPart1[-1182]
+    100034: default_MeshPart1[-1208]
+    100036: default_MeshPart1[-1232]
+    100038: default_MeshPart1[-960]
+    100040: newnewFog[-974]
+    100042: Reflecting_Plane[-1032]
+    100044: //RootNode
+    400000: default_MeshPart0[-1016]
+    400002: default_MeshPart0[-1050]
+    400004: default_MeshPart0[-1082]
+    400006: default_MeshPart0[-1106]
+    400008: default_MeshPart0[-1134]
+    400010: default_MeshPart0[-1156]
+    400012: default_MeshPart0[-1184]
+    400014: default_MeshPart0[-1206]
+    400016: default_MeshPart0[-1234]
+    400018: default_MeshPart0[-962]
+    400020: default_MeshPart1[-1014]
+    400022: default_MeshPart1[-1052]
+    400024: default_MeshPart1[-1084]
+    400026: default_MeshPart1[-1108]
+    400028: default_MeshPart1[-1132]
+    400030: default_MeshPart1[-1158]
+    400032: default_MeshPart1[-1182]
+    400034: default_MeshPart1[-1208]
+    400036: default_MeshPart1[-1232]
+    400038: default_MeshPart1[-960]
+    400040: newnewFog[-974]
+    400042: Reflecting_Plane[-1032]
+    400044: //RootNode
+    2300000: default_MeshPart0[-1016]
+    2300002: default_MeshPart0[-1050]
+    2300004: default_MeshPart0[-1082]
+    2300006: default_MeshPart0[-1106]
+    2300008: default_MeshPart0[-1134]
+    2300010: default_MeshPart0[-1156]
+    2300012: default_MeshPart0[-1184]
+    2300014: default_MeshPart0[-1206]
+    2300016: default_MeshPart0[-1234]
+    2300018: default_MeshPart0[-962]
+    2300020: default_MeshPart1[-1014]
+    2300022: default_MeshPart1[-1052]
+    2300024: default_MeshPart1[-1084]
+    2300026: default_MeshPart1[-1108]
+    2300028: default_MeshPart1[-1132]
+    2300030: default_MeshPart1[-1158]
+    2300032: default_MeshPart1[-1182]
+    2300034: default_MeshPart1[-1208]
+    2300036: default_MeshPart1[-1232]
+    2300038: default_MeshPart1[-960]
+    2300040: newnewFog[-974]
+    2300042: Reflecting_Plane[-1032]
+    3300000: default_MeshPart0[-1016]
+    3300002: default_MeshPart0[-1050]
+    3300004: default_MeshPart0[-1082]
+    3300006: default_MeshPart0[-1106]
+    3300008: default_MeshPart0[-1134]
+    3300010: default_MeshPart0[-1156]
+    3300012: default_MeshPart0[-1184]
+    3300014: default_MeshPart0[-1206]
+    3300016: default_MeshPart0[-1234]
+    3300018: default_MeshPart0[-962]
+    3300020: default_MeshPart1[-1014]
+    3300022: default_MeshPart1[-1052]
+    3300024: default_MeshPart1[-1084]
+    3300026: default_MeshPart1[-1108]
+    3300028: default_MeshPart1[-1132]
+    3300030: default_MeshPart1[-1158]
+    3300032: default_MeshPart1[-1182]
+    3300034: default_MeshPart1[-1208]
+    3300036: default_MeshPart1[-1232]
+    3300038: default_MeshPart1[-960]
+    3300040: newnewFog[-974]
+    3300042: Reflecting_Plane[-1032]
+    4300000: default_MeshPart0[-1016]
+    4300002: default_MeshPart0[-1050]
+    4300004: default_MeshPart0[-1082]
+    4300006: default_MeshPart0[-1106]
+    4300008: default_MeshPart0[-1134]
+    4300010: default_MeshPart0[-1156]
+    4300012: default_MeshPart0[-1184]
+    4300014: default_MeshPart0[-1206]
+    4300016: default_MeshPart0[-1234]
+    4300018: default_MeshPart0[-962]
+    4300020: default_MeshPart1[-1014]
+    4300022: default_MeshPart1[-1052]
+    4300024: default_MeshPart1[-1084]
+    4300026: default_MeshPart1[-1108]
+    4300028: default_MeshPart1[-1132]
+    4300030: default_MeshPart1[-1158]
+    4300032: default_MeshPart1[-1182]
+    4300034: default_MeshPart1[-1208]
+    4300036: default_MeshPart1[-1232]
+    4300038: default_MeshPart1[-960]
+    4300040: newnewFog[-974]
+    4300042: Reflecting_Plane[-1032]
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

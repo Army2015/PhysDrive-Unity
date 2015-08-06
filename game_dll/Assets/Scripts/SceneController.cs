@@ -8,7 +8,12 @@ using System.Runtime.InteropServices;
 
 
 public class SceneController : MonoBehaviour {
+	public AudioClip explosionSound;
+	private AudioSource source;
 
+	void Awake () {
+		source = GetComponent<AudioSource>();
+	}
 	// Use this for initialization
 	public GameObject jeep;
 	public GameObject fltire, frtire, bltire, brtire;
@@ -183,7 +188,12 @@ public class SceneController : MonoBehaviour {
 			var jv = j["explosion_pos"];
 			float x = jv[0].AsFloat, y = jv[1].AsFloat, z = jv [2].AsFloat;
 			Instantiate(explosion, new Vector3(x, y, z), Quaternion.identity);
+			//sound Explosion
+			source.PlayOneShot(explosionSound,1f);
+
 		}
+		
+
 
 	}
 

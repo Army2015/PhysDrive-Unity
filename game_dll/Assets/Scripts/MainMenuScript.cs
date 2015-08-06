@@ -65,8 +65,8 @@ public class MainMenuScript : MonoBehaviour {
 
 		if(GUI.Button(BuildStringToGUI(150f,rightOfset),"Level 4",buttonColor)){
 			source.PlayOneShot(clickSound,1f);
-			Application.LoadLevel("Scene4");
-		;
+			print ("4");
+			//Application.LoadLevel("Scene4");
 			}
 
 		if(GUI.Button(BuildStringToGUI(300f,rightOfset),"Level 5",buttonColor)){
