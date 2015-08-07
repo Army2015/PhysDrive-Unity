@@ -29,7 +29,7 @@ public class MainMenuScript : MonoBehaviour {
 	void OnGUI(){
 		//Display backgroundTexture
 		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroundTexture);
-		GUI.Box (new Rect(Screen.width / 2 - 50,70,100,100),"Main Menu", MenuColor);
+		GUI.Box (new Rect(Screen.width / 2 - 50,Screen.height / 30,100,100),"Main Menu", MenuColor);
 		FirstMenu ();
 	}
 
