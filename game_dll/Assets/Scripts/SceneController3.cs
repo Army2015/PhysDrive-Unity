@@ -37,7 +37,7 @@ public class SceneController3 : MonoBehaviour {
 	public GameObject[] rocks;
 	public GameObject[] rocks_prefab;
 	void InitRocks(){
-		int rocks_num = 50;
+		int rocks_num = 40;
 		rocks = new GameObject[rocks_num];
 		int n = rocks_prefab.Length;
 		for (int i = 0; i < rocks_num; i++) {
