@@ -3,13 +3,16 @@ using System.Collections;
 
 public class CollisionDisapear : MonoBehaviour {
 	public GameObject target;
+
+	private bool flagDestroyed = false;
+
 	public AudioClip collectSound;
 	private AudioSource source;
-	private bool enterOnce = false;
+
+	
 	void Awake () {
 		source = GetComponent<AudioSource>();
 	}
-	
 	// Use this for initialization
 	void Start () {
 		target = GameObject.FindGameObjectWithTag ("Player");
@@ -20,14 +23,22 @@ public class CollisionDisapear : MonoBehaviour {
 	void Update () {
 	float distance = Vector3.Distance (target.transform.position, transform.position);
 	print (distance);
-		if (distance <= 10 && !enterOnce) {
-			enterOnce = true;
-			source.PlayOneShot(collectSound,1f);
+		if (distance <= 10 && !flagDestroyed) {
+			flagDestroyed = true;
 
-			Destroy(gameObject,.3f);
+			Destroy(gameObject,.14f);
 		
-
 		}
+
+		if (getFlagDestroyed ()) {
+			source.PlayOneShot(collectSound,1f);
+		}
+
+
+
+	}
+	public bool getFlagDestroyed(){
+		return flagDestroyed;
 	}
 
 }
